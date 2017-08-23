@@ -1,4 +1,4 @@
-#line[0] is e for east, m for medium, or h for hard 
+#line[0] is e for east, m for medium, or h for hard
 
 
 require 'csv'
@@ -23,6 +23,33 @@ class WordGuess
         @words["h"] = line[1..-1]
       end #if/else
     end #.each
+
+############ways that Jamie tested this
+# def get_words
+#   CSV.open("words.csv", 'r').each do |line|
+#     @words[line[0]] = line[1..-1]
+#   end
+# end
+#
+# #Tests
+#   puts @words.keys
+#     #=> "m", "e", "h"
+#   puts @words["e"].length
+#     #=>16922
+#   puts @words["m"].length
+#     #=> 143153
+#   puts @words["h"].length
+#     #=>  12583
+    # puts @words["e"].include?("e")
+      #=> false
+      #so you know that the first element in the array ("e") was not added as a value
+
+######## How Ulia did this (less code). More dynamic because we chould add more difficulty levels:
+# @words = {}
+# CSV.open("words.csv", 'r').each do |line|
+#   @words[line[0]] = line.drop(1)
+# end
+######################
 
 ############### THE FIRST WAY I TRIED IT THAT DIDN'T WORK:
     # @words = {}
