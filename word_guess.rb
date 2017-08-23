@@ -1,10 +1,4 @@
-# Alter the game to get its words from the provided words.csv.
-# The CSV has three lines. The first entry on each line is the difficulty and every other entry is a word for that difficulty.
-# Example: e,cat,hat,bat,rat,sat,wat,nat,mat....
-# The e is the difficulty (easy mode).
-# Everything else is a word for the easy difficulty
-# The updated program should read the csv and select a random word from the appropriate difficulty.
-# No other gameplay changes are required.
+#line[0] is e for east, m for medium, or h for hard 
 
 
 require 'csv'
