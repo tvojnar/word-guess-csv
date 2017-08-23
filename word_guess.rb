@@ -1,17 +1,67 @@
+# Alter the game to get its words from the provided words.csv.
+# The CSV has three lines. The first entry on each line is the difficulty and every other entry is a word for that difficulty.
+# Example: e,cat,hat,bat,rat,sat,wat,nat,mat....
+# The e is the difficulty (easy mode).
+# Everything else is a word for the easy difficulty
+# The updated program should read the csv and select a random word from the appropriate difficulty.
+# No other gameplay changes are required.
+
+
+require 'csv'
+
 class WordGuess
-  def initialize(debug = false)
+  def initialize(debug = true)
     # are we in debug mode?
     @debug = debug
-
-    # possible words, selected at random
+#populates the @word hash from a csv file
     @words = {
-      "e" => %w(dog cat bug hat cap lit kin fan fin fun tan ten tin ton),
-      "m" => %w(plain claim brine crime alive bride skine drive slime stein jumpy),
-      "h" => %w(
-          machiavellian prestidigitation plenipotentiary quattuordecillion
-          magnanimous unencumbered bioluminescent circumlocution
-        )
-    }
+    "e" => [],
+    "m" => [],
+    "h" => []
+  }
+
+    CSV.open("words.csv", 'r').each do |line|
+      if line[0] == "e"
+        @words["e"] = line[1..-1]
+      elsif line[0] =="m"
+        @words["m"] = line[1..-1]
+      elsif line[0] == "h"
+        @words["h"] = line[1..-1]
+      end #if/else
+    end #.each
+
+############### THE FIRST WAY I TRIED IT THAT DIDN'T WORK:
+    # @words = {}
+    # easy = []
+    # medium = []
+    # hard = []
+    #
+    # CSV.open("words.csv", 'r').each do |line|
+    #   if line[0] == "e"
+    #     easy << line[1..-1]
+    #   elsif line[0] =="m"
+    #     medium << line[1..-1]
+    #   elsif line[0] == "h"
+    #   hard << line[1..-1]
+    #   end #if/else
+    # end #.each
+    #
+    # @words["e"] = easy
+    # @words["m"] = medium
+    # @words["h"] = hard
+###########################################
+
+###### HOW THE CODE WAS TO START OFF WITH:######
+    # possible words, selected at random
+    # @words = {
+    #   "e" => %w(dog cat bug hat cap lit kin fan fin fun tan ten tin ton),
+    #   "m" => %w(plain claim brine crime alive bride skine drive slime stein jumpy),
+    #   "h" => %w(
+    #       machiavellian prestidigitation plenipotentiary quattuordecillion
+    #       magnanimous unencumbered bioluminescent circumlocution
+    #     )
+    # }
+#########################
 
     # players attempts allowed by difficulty
     @tries = {
